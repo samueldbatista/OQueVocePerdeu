@@ -2,10 +2,7 @@ package br.ufrn.imd.sbean;
 
 import br.ufrn.imd.dao.BoletimOcorrenciaDao;
 import br.ufrn.imd.dao.ObjetoDao;
-import br.ufrn.imd.dominio.BoletimOcorrencia;
-import br.ufrn.imd.dominio.InformacaoPessoal;
-import br.ufrn.imd.dominio.Objeto;
-import br.ufrn.imd.dominio.TipoBusca;
+import br.ufrn.imd.dominio.*;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -25,7 +22,14 @@ public class ObjetoSB implements ObjetoSBInterface {
 
     @Override
     public Objeto salvar(Objeto objeto) {
-        Objeto obj = objetoDao.salvar(objeto);
+        Objeto obj = buscarObjetoPorIdentificador(objeto.getIdentificador());
+        if (obj != null) {
+            obj.setStatus(StatusObjeto.ENCONTRADO);
+            obj.setDelegacia(objeto.getDelegacia());
+            objetoDao.salvar(obj);
+        } else {
+            objetoDao.salvar(objeto);
+        }
         return obj;
     }
 
@@ -80,6 +84,18 @@ public class ObjetoSB implements ObjetoSBInterface {
                     objetos.addAll(bo.getObjetos());
                 }
             }
+        }
+    }
+
+    public Objeto buscarObjetoPorIdentificador(String identificador) {
+        List<Objeto> objetos = objetoDao.buscar(identificador);
+        if (objetos.size() != 0) {
+            Objeto obj = objetos.get(0);
+
+            obj.setStatus(StatusObjeto.ENCONTRADO);
+            return obj;
+        } else {
+            return null;
         }
     }
 }

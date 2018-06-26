@@ -13,6 +13,4 @@ public interface ObjetoSBInterface {
     void remover(Long id);
     Objeto editar(Long id);
     List<Objeto> pesquisarPorTipo(TipoBusca tipoBusca, InformacaoPessoal informacaoPessoal, String identificador);
-
-
 }
