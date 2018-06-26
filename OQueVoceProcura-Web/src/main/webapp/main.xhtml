@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+<h:body>
+    <ui:composition template="template/main_layout.xhtml">
+        <ui:define name="content">
+            <!--<div class="container container-main">-->
+
+            <div class="container container-main">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col s12 borda z-depth-2">
+                        <div class="row center">
+                            <h2>#{objetoMB.listar().size()} Objetos Encontrados</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row center">
+                    <div class="col s4">
+                        <div class="row">
+                            <a class="btn-floating btn-large waves-effect waves-light red" href="/usuarios/form.xhtml">
+                                <i class="material-icons">add</i></a>
+                        </div>
+                        <div class="row">
+                            <h6>Cadastrar Usuário</h6>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <div class="row">
+                            <a class="btn-floating btn-large waves-effect waves-light red" href="/objetos/form.xhtml">
+                                <i class="material-icons">add</i></a>
+                        </div>
+                        <div class="row">
+                            <h6>Cadastrar Objeto</h6>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <div class="row">
+                            <a class="btn-floating btn-large waves-effect waves-light red" href="/delegacia/form.xhtml">
+                                <i class="material-icons">add</i></a>
+                        </div>
+                        <div class="row">
+                            <h6>Cadastrar Delegacia</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

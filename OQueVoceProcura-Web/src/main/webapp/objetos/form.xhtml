@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+<h:body>
+
+    <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
+        <ui:define name="content">
+
+            <div class="row ">
+                <div class="card-panel">
+                    <h:form>
+                        <h4 class="center">Cadastro de objetos</h4>
+                        <h:inputHidden id="id-objeto" value="#{objetoMB.objeto.id}"/>
+                        <div class="card-content">
+                            <div class="input-field col s10 offset-s1">
+                                <h:inputText id="nome" value="#{objetoMB.objeto.nome}"/>
+                                <label for="nome">Insira o nome</label>
+                            </div>
+                            <div class="input-field col s10 offset-s1">
+                                <h:inputText id="identificador" value="#{objetoMB.objeto.identificador}"/>
+                                <label for="identificador">Insira o Identificador</label>
+                            </div>
+                            <div class="input-field col s10 offset-s1">
+                                <h:inputTextarea id="descricao" class="materialize-textarea"
+                                                 value="#{objetoMB.objeto.descricao}"/>
+                                <label for="descricao">Descreva as características do Objeto</label>
+                            </div>
+                            <div class="input-field col s3 offset-s1">
+                                <h:selectOneMenu id="condicao"
+                                                 value="#{objetoMB.objeto.condicao}" required="true"
+                                                 class=""
+                                                 requiredMessage="Valor é obrigatório">
+                                    <f:selectItems value="#{objetoMB.selectCondicaoObjeto()}" var="condicao"
+                                                   itemValue="#{condicao.valor}" itemLabel="#{condicao.chave}"/>
+                                </h:selectOneMenu>
+                                <label>Estado de conservação</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <h:selectOneMenu id="status"
+                                                 value="#{objetoMB.objeto.status}" required="true"
+                                                 class=""
+                                                 requiredMessage="Valor é obrigatório">
+                                    <f:selectItems value="#{objetoMB.selectStatus()}" var="status"
+                                                   itemValue="#{status.valor}" itemLabel="#{status.chave}"/>
+                                </h:selectOneMenu>
+                                <label>Status do objeto</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <h:selectOneMenu id="objeto"
+                                                 value="#{objetoMB.objeto.tipo}" required="true" class=""
+                                                 requiredMessage="Valor é obrigatório">
+                                    <f:selectItems value="#{objetoMB.selectTipoObjeto()}" var="tipo"
+                                                   itemValue="#{tipo.valor}" itemLabel="#{tipo.chave}"/>
+                                </h:selectOneMenu>
+                                <label>Tipo de objeto</label>
+                            </div>
+                            <div class="input-field col s10 offset-s1">
+                                <h:selectOneMenu id="delegacia"
+                                                 value="#{objetoMB.objeto.delegacia.id}" required="true" class=""
+                                                 requiredMessage="Valor é obrigatório">
+                                    <f:selectItems value="#{usuarioMB.delegacias}" var="delegacia"
+                                                   itemValue="#{delegacia.id}"
+                                                   itemLabel="#{delegacia.abreviatura.concat(' - '.concat(delegacia.nome))}"/>
+                                </h:selectOneMenu>
+                                <label>Delegacia</label>
+                            </div>
+                        </div>
+                        <div class="center">
+                            <h:commandLink class="btn grey darken-2 center" action="#{objetoMB.salvar}"><i
+                                    class="material-icons right">send</i>Salvar</h:commandLink>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-panel">
+                    <h:panelGroup id="fotos">
+
+                        <h:form id="form-foto" styleClass="center" enctype="multipart/form-data">
+                            <h:inputFile value="#{objetoMB.imagem}"/>
+                            <h:commandButton id="btn-fotos" value="Adicionar" styleClass="btn light-blue darken-1 center">
+                                <f:ajax listener="#{objetoMB.adicionarImagem()}" execute="form-foto" render="fotos"
+                                        event="click"/>
+                            </h:commandButton>
+                        </h:form>
+
+                        <c:forEach var="img" items="#{objetoMB.fotos}" begin="1" varStatus="status">
+                            <div class="collection">
+                                <h:outputLink value="#modal#{status.index}" onclick="iniciarModal()" styleClass="collection-item modal-trigger">Imagem - #{status.index}</h:outputLink>
+                            </div>
+
+                            <!-- Modal Structure -->
+                            <div id="modal#{status.index}" class="modal" style="width: 600px">
+                                <div class="modal-content center">
+                                    <h:graphicImage styleClass="materialboxed center" value="data:#{img.formato};base64,#{img.b64}"
+                                                    style="width: 400px; max-height: 600px;"/>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </h:panelGroup>
+
+                </div>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

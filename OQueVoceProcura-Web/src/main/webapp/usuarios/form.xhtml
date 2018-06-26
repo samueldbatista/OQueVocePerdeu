@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:body>
+
+    <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
+        <ui:define name="content">
+            <h:form id="form-objeto">
+                    <div class="row ">
+                        <div class="card-panel">
+                            <h4 class="center">Cadastro de usuários</h4>
+                            <h:inputHidden id="id-usuario" value="#{usuarioMB.usuario.id}"/>
+                            <div class="card-content">
+                                <div class="input-field col s10 offset-s1">
+                                    <h:inputText id="nome" value="#{usuarioMB.usuario.nome}" />
+                                    <label for="nome">Insira o nome</label>
+                                </div>
+                                <div class="input-field col s10 offset-s1">
+                                    <h:inputText id="email" value="#{usuarioMB.usuario.email}"/>
+                                    <label for="email">Insira o email</label>
+                                </div>
+                                <div class="input-field col s3 offset-s1">
+                                    <h:inputText id="matricula" maxlength="8" minlength="7" value="#{usuarioMB.usuario.matricula}"/>
+                                    <label for="matricula">Insira a matricula</label>
+                                </div>
+                                <div class="input-field col s3">
+                                    <h:inputText id="login" value="#{usuarioMB.usuario.login}" />
+                                    <label for="login">Insira o login</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <h:inputSecret id="senha" value="#{usuarioMB.usuario.senha}" />
+                                    <label for="senha">Insira sua senha</label>
+                                </div>
+                                <div class="input-field col s10 offset-s1">
+                                    <h:selectOneMenu id="perfil"
+                                                     value="#{usuarioMB.usuario.perfil}" required="true" class=""
+                                                     requiredMessage="Valor é obrigatório">
+                                        <f:selectItems value="#{usuarioMB.selectPerfis()}" var="perfil" itemValue="#{perfil.valor}"
+                                                       itemLabel="#{perfil.chave}"/>
+                                    </h:selectOneMenu>
+                                    <label>Tipo de Usuário</label>
+                                </div>
+                                <div class="input-field col s10 offset-s1">
+                                    <h:selectOneMenu id="delegacia"
+                                                     value="#{usuarioMB.usuario.delegacia.id}" required="true" class=""
+                                                     requiredMessage="Valor é obrigatório">
+                                        <f:selectItems value="#{usuarioMB.delegacias}" var="delegacia" itemValue="#{delegacia.id}"
+                                                       itemLabel="#{delegacia.abreviatura.concat(' - '.concat(delegacia.nome))}"/>
+                                    </h:selectOneMenu>
+                                    <label>Delegacia</label>
+                                </div>
+
+                            </div>
+                            <div class="center">
+                                <h:commandLink class="btn light-blue darken-1 center" action="#{usuarioMB.salvar}"><i class="material-icons right">send</i>Salvar</h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jstl/core"
+>
+
+<h:head>
+    <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/resources/css/inicio.css"></link>
+    <link rel="stylesheet" type="text/css" href="${facesContext.externalContext.requestContextPath}/resources/plugins/materialize/css/materialize.css"></link>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oxygen" rel="stylesheet"/>
+</h:head>
+
+<h:body>
+        <div id="header">
+            <ui:insert name="header" >
+                <ui:include src="${facesContext.externalContext.requestContextPath}/template/header.xhtml" />
+            </ui:insert>
+        </div>
+        <main>
+            <div id="content" class="container">
+                <ui:insert name="content" >
+                    <ui:include src="${facesContext.externalContext.requestContextPath}/template/content.xhtml" />
+                </ui:insert>
+            </div>
+        </main>
+        <div id="footer">
+            <ui:insert name="footer" >
+                <ui:include src="${facesContext.externalContext.requestContextPath}/template/footer.xhtml" />
+            </ui:insert>
+        </div>
+
+    <script type="text/javascript"
+            src="${facesContext.externalContext.requestContextPath}/resources/plugins/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/resources/plugins/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/resources/js/endereco/cep.js"></script>
+    <script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/resources/js/init.js"></script>
+
+</h:body>
+</html>

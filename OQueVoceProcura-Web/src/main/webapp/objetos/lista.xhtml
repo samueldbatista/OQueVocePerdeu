@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:body>
+
+    <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
+        <ui:define name="content">
+                <div class="row ">
+                    <div class="card-panel">
+                        <h4 class="center">Lista de Objetos</h4>
+                        <h:form>
+                            <h:commandLink class="waves-effect waves-light btn"
+                                           action="/objetos/form.xhtml" value="Cadastrar">
+                            </h:commandLink>
+                        </h:form>
+                        <h:dataTable value="#{objetoMB.listar()}" var="objeto">
+                            <h:column>
+                                <!-- column header -->
+                                <f:facet name="header">Nome</f:facet>
+                                <!-- row record -->
+                                #{objeto.nome}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Identificador</f:facet>
+                                #{objeto.identificador}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Delegacia</f:facet>
+                                #{objeto.delegacia.nome}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                #{objeto.status.chave}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Ações</f:facet>
+                                <h:form>
+                                    <h:commandLink action="#{objetoMB.editar(objeto.id)}">
+                                        <i class="material-icons">edit</i>
+                                    </h:commandLink>
+                                    <h:commandLink action="#{objetoMB.remover(objeto.id)}">
+                                        <i class="material-icons">delete</i>
+                                    </h:commandLink>
+                                </h:form>
+                            </h:column>
+
+                        </h:dataTable>
+                        <!--<h4 class="center">Busca de objetos</h4>-->
+                        <!--<h:inputHidden id="id-objeto" value="#{objetoMB.objeto.id}"/>-->
+                        <!--<div class="card-content">-->
+                            <!--<div class="row">-->
+                            <!--<div class="input-field col s2 offset-s1">-->
+                                <!--<h:selectOneMenu id="status"-->
+                                                 <!--value="#{objetoMB.objeto.status}" required="true"-->
+                                                 <!--class=""-->
+                                                 <!--requiredMessage="Valor é obrigatório">-->
+                                    <!--<f:selectItems value="#{objetoMB.selectStatus()}" var="status"-->
+                                                   <!--itemValue="#{status.valor}" itemLabel="#{status.chave}"/>-->
+                                <!--</h:selectOneMenu>-->
+                                <!--<label>Status do objeto</label>-->
+                            <!--</div>-->
+                            <!--<div class="input-field col s2">-->
+                                <!--<h:selectOneMenu id="objeto"-->
+                                                 <!--value="#{objetoMB.objeto.tipo}" required="true" class=""-->
+                                                 <!--requiredMessage="Valor é obrigatório">-->
+                                    <!--<f:selectItems value="#{objetoMB.selectTipoObjeto()}" var="tipo"-->
+                                                   <!--itemValue="#{tipo.valor}" itemLabel="#{tipo.chave}"/>-->
+                                <!--</h:selectOneMenu>-->
+                                <!--<label>Tipo de objeto</label>-->
+                            <!--</div>-->
+                            <!--<div class="input-field col s6">-->
+                                <!--<h:inputText id="nome" value="#{objetoMB.objeto.nome}"/>-->
+                                <!--<label for="nome">Insira o nome</label>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+
+
+
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#formulario.xhtml" PATH="/formulario.xhtml"
+  SHAPE="259,164,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#formulario.xhtml:0" NAME="item"
+   PATH="/formulario.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Soma::#resultado.xhtml" NAME="output"
+    PATH="/resultado.xhtml" TARGET="rules:#resultado.xhtml" TITLE="Soma" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#resultado.xhtml" PATH="/resultado.xhtml"
+  SHAPE="272,360,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+</PROCESS>

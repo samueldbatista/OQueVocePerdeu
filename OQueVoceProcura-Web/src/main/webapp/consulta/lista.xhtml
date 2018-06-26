@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+<h:body>
+
+    <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
+        <ui:define name="content">
+
+            <!--&lt;!&ndash; Modal Trigger &ndash;&gt;-->
+            <!--<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>-->
+
+            <!-- Modal Structure -->
+
+            <h:panelGroup id="form-panel">
+                <h:form id="form-pesquisa">
+                    <div class="row ">
+                        <div class="card-panel">
+                            <h4 class="center">Busca de objetos</h4>
+                            <h:inputHidden id="id-objeto" value="#{objetoMB.objeto.id}"/>
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col s3 offset-s1">
+                                        <label>Tipo de busca</label>
+                                        <h:selectOneMenu id="status" styleClass="browser-default"
+                                                         value="#{objetoMB.tipoBusca}" required="true"
+                                                         requiredMessage="Valor é obrigatório">
+                                            <f:selectItems value="#{objetoMB.selectTipoBusca()}" var="tipo"
+
+                                                           itemValue="#{tipo.valor}" itemLabel="#{tipo.chave}"/>
+                                            <f:ajax listener="#{objetoMB.modificarSelect()}" execute="@this"
+                                                    render="form-panel"
+                                                    event="change"/>
+                                        </h:selectOneMenu>
+
+                                    </div>
+                                    <c:if test="#{objetoMB.tipoBusca.id == 1}">
+                                        <div class="col s2">
+                                            <label>Documento</label>
+                                            <h:selectOneMenu id="objeto"
+                                                             value="#{objetoMB.info}" required="true"
+                                                             styleClass="browser-default"
+                                                             requiredMessage="Valor é obrigatório">
+                                                <f:selectItems value="#{objetoMB.selectInformacoes()}" var="tipo"
+                                                               itemValue="#{tipo.valor}" itemLabel="#{tipo.chave}"/>
+                                            </h:selectOneMenu>
+
+                                        </div>
+                                    </c:if>
+                                    <div class="input-field col s5">
+                                        <h:inputText id="identificador" value="#{objetoMB.identificador}"/>
+                                        <label for="identificador">Insira o identificador</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center">
+                                <h:commandLink class="btn light-blue darken-1 center"
+                                               action="#{objetoMB.pesquisar}">Pesquisar</h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </h:panelGroup>
+            <c:if test="#{not empty objetoMB.objetos}">
+
+                <ul class="collection" style="box-shadow: 1px 2px 1px #ddd;">
+                    <c:forEach items="#{objetoMB.objetos}" var="objeto">
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle">collections</i>
+                            <span class="title"><b>#{objeto.nome}</b></span>
+                            <p><b>Status: </b>#{objeto.status.chave}</p>
+                            <p><b>Local: </b>#{objeto.delegacia.nome}</p>
+
+                            <a href="#modal#{objeto.id}" class="secondary-content modal-trigger"><i class="material-icons">collections</i></a>
+                        </li>
+                        <c:forEach items="#{objeto.fotos}" var="foto" varStatus="state">
+                            <div id="modal#{objeto.id}" class="modal">
+                                <div class="modal-content">
+                                    <div class="slider">
+                                        <ul class="slides">
+                                            <li>
+                                                <h:graphicImage styleClass="materialboxed center"
+                                                                value="data:#{foto.formato};base64,#{foto.b64}"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:forEach>
+                </ul>
+
+            </c:if>
+
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

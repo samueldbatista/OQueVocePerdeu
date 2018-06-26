@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jstl/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+<body>
+<ui:composition>
+    <div class="navbar-fixed">
+        <nav class="light-blue darken-1">
+            <div class="container container-main">
+                <div class="nav-wrapper">
+                    <a href="/index.xhtml" class="brand-logo"><img src="/resources/imagens/logo_nav_blue.png" width="280" alt="Pagina inicial" /></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="#introducao">Página inicial</a></li>
+                        <li><a href="#ajuda">Ajuda</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                        <c:if test="#{loginMB.usuario.nome != null}">
+                            <li><a href="/usuarios/lista.xhtml">Usuários</a></li>
+                            <li><a href="/objetos/lista.xhtml">Objetos</a></li>
+                            <li><a href="/delegacia/lista.xhtml">Delegacias</a></li>
+                            <li>
+                                <h:form>
+                                    <h:commandLink action="#{loginMB.logout()}">Sair</h:commandLink>
+                                </h:form>
+                            </li>
+                        </c:if>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+</ui:composition>
+</body>
+</html>

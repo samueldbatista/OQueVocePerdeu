@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:body>
+
+    <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
+        <ui:define name="content">
+                    <div class="row ">
+                        <div class="card-panel">
+                            <h4>Lista de usuários</h4>
+                            <h:form>
+                                <h:commandLink class="waves-effect waves-light btn"
+                                               action="/usuarios/form.xhtml" value="Cadastrar">
+                                </h:commandLink>
+                            </h:form>
+                            <h:dataTable value="#{usuarioMB.listar()}" var="usuario">
+                                <h:column>
+                                    <!-- column header -->
+                                    <f:facet name="header">Nome</f:facet>
+                                    <!-- row record -->
+                                    #{usuario.nome}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Email</f:facet>
+                                    #{usuario.email}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Matricula</f:facet>
+                                    #{usuario.matricula}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Perfil</f:facet>
+                                    #{usuario.perfil}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Delegacia</f:facet>
+                                    #{usuario.delegacia.nome}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Ações</f:facet>
+                                    <h:form>
+                                        <h:commandLink value="" action="#{usuarioMB.editar(usuario.id)}">
+                                            <i class="material-icons">edit</i>
+                                        </h:commandLink>
+                                        <h:commandLink value="" action="#{usuarioMB.remover(usuario.id)}">
+                                            <i class="material-icons">delete</i>
+                                        </h:commandLink>
+                                    </h:form>
+                                </h:column>
+
+                            </h:dataTable>
+                        </div>
+                    </div>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

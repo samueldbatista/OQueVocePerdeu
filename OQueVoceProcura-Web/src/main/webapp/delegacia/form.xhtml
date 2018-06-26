@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:body>
+
+    <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
+        <ui:define name="content">
+            <h:form id="idForm">
+                    <div class="row">
+                        <div class="card-panel">
+                            <h4 class="center">Cadastro de Delegacias</h4>
+                            <h:inputHidden id="id-delegacia" value="#{delegaciaMB.delegacia.id}"/>
+                            <h:inputHidden id="id-endereco" value="#{delegaciaMB.delegacia.endereco.id}"/>
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="input-field col s10 offset-s1">
+                                        <h:inputText id="nome" value="#{delegaciaMB.delegacia.nome}" />
+                                        <label for="nome">Insira o nome</label>
+                                    </div>
+                                    <div class="input-field col s10 offset-s1">
+                                        <h:inputText id="abreviatura" value="#{delegaciaMB.delegacia.abreviatura}"/>
+                                        <label for="abreviatura">Insira a abreviatura</label>
+                                    </div>
+                                    <div class="input-field col s10 offset-s1">
+                                        <h:inputText id="login" value="#{delegaciaMB.delegacia.telefone}"/>
+                                        <label for="login">Insira o Telefone</label>
+                                    </div>
+
+                                    <div class="input-field col s3 offset-s1">
+                                        <h:inputText id="cepDelegacia" styleClass="cep-class" onchange="buscarEndereco()"
+                                                     value="#{delegaciaMB.delegacia.endereco.cep}"/>
+                                        <label for="cepDelegacia">Insira o CEP</label>
+                                    </div>
+                                    <div class="input-field col s7">
+                                        <h:inputText id="ruaDelegacia" value="#{delegaciaMB.delegacia.endereco.rua}"/>
+                                        <label for="ruaDelegacia">Rua</label>
+                                    </div>
+                                    <div class="input-field col s2 offset-s1">
+                                        <h:inputText id="numeroDelegacia" value="#{delegaciaMB.delegacia.endereco.numero}"/>
+                                        <label for="numeroDelegacia">Numero</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                        <h:inputText id="bairroDelegacia" value="#{delegaciaMB.delegacia.endereco.bairro}"/>
+                                        <label for="bairroDelegacia">Bairro</label>
+                                    </div>
+                                    <div class="input-field col s3">
+                                        <h:inputText id="cidadeDelegacia" value="#{delegaciaMB.delegacia.endereco.cidade}"/>
+                                        <label for="cidadeDelegacia">Cidade</label>
+                                    </div>
+                                    <div class="input-field col s1">
+                                        <h:inputText id="estadoDelegacia" value="#{delegaciaMB.delegacia.endereco.estado}"/>
+                                        <label for="estadoDelegacia">Estado</label>
+                                    </div>
+                                </div>
+                                <div class="center">
+                                    <h:commandLink class="btn light-blue darken-1 center" action="#{delegaciaMB.salvar}">
+                                    <i class="material-icons right">send</i>Salvar</h:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>
