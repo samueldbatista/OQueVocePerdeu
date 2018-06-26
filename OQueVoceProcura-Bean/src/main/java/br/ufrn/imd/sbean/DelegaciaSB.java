@@ -15,7 +15,7 @@ import java.util.List;
 @Local
 @Stateless
 public class DelegaciaSB implements DelegaciaSBInterface {
-
+    // teste
     @Inject
     private DelegaciaDao delegaciaDao;
 
