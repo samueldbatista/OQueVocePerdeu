@@ -5,35 +5,42 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
 >
 <h:body>
 
     <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
         <ui:define name="content">
             <h:form id="form-objeto">
+                <p:messages closable="true"/>
                     <div class="row ">
                         <div class="card-panel">
                             <h4 class="center">Cadastro de usuários</h4>
                             <h:inputHidden id="id-usuario" value="#{usuarioMB.usuario.id}"/>
                             <div class="card-content">
                                 <div class="input-field col s10 offset-s1">
-                                    <h:inputText id="nome" value="#{usuarioMB.usuario.nome}" />
+                                    <h:inputText id="nome" value="#{usuarioMB.usuario.nome}" required="true"
+                                                 requiredMessage="Campo Nome em branco."/>
                                     <label for="nome">Insira o nome</label>
                                 </div>
                                 <div class="input-field col s10 offset-s1">
-                                    <h:inputText id="email" value="#{usuarioMB.usuario.email}"/>
+                                    <h:inputText id="email" value="#{usuarioMB.usuario.email}" required="true"
+                                                 requiredMessage="Campo E-mail em branco."/>
                                     <label for="email">Insira o email</label>
                                 </div>
                                 <div class="input-field col s3 offset-s1">
-                                    <h:inputText id="matricula" maxlength="8" minlength="7" value="#{usuarioMB.usuario.matricula}"/>
+                                    <h:inputText id="matricula" maxlength="8" minlength="7" value="#{usuarioMB.usuario.matricula}"
+                                                 required="true" requiredMessage="Campo Matricula em branco."/>
                                     <label for="matricula">Insira a matricula</label>
                                 </div>
                                 <div class="input-field col s3">
-                                    <h:inputText id="login" value="#{usuarioMB.usuario.login}" />
+                                    <h:inputText id="login" value="#{usuarioMB.usuario.login}" required="true"
+                                                 requiredMessage="Campo Login em branco."/>
                                     <label for="login">Insira o login</label>
                                 </div>
                                 <div class="input-field col s4">
-                                    <h:inputSecret id="senha" value="#{usuarioMB.usuario.senha}" />
+                                    <h:inputSecret id="senha" value="#{usuarioMB.usuario.senha}" required="true"
+                                                   requiredMessage="Campo Senha em branco."/>
                                     <label for="senha">Insira sua senha</label>
                                 </div>
                                 <div class="input-field col s10 offset-s1">

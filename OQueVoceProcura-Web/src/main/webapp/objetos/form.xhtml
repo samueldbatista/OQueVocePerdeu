@@ -4,13 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+
 >
 <h:body>
 
     <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
         <ui:define name="content">
-
+            <p:messages closable="true"/>
             <div class="row ">
                 <div class="card-panel">
                     <h:form>
@@ -18,16 +21,19 @@
                         <h:inputHidden id="id-objeto" value="#{objetoMB.objeto.id}"/>
                         <div class="card-content">
                             <div class="input-field col s10 offset-s1">
-                                <h:inputText id="nome" value="#{objetoMB.objeto.nome}"/>
+                                <h:inputText id="nome" value="#{objetoMB.objeto.nome}" required="true"
+                                             requiredMessage="Campo Nome em branco"/>
                                 <label for="nome">Insira o nome</label>
                             </div>
                             <div class="input-field col s10 offset-s1">
-                                <h:inputText id="identificador" value="#{objetoMB.objeto.identificador}"/>
+                                <h:inputText id="identificador" value="#{objetoMB.objeto.identificador}" required="true"
+                                             requiredMessage="Campo Identificador em branco"/>
                                 <label for="identificador">Insira o Identificador</label>
                             </div>
                             <div class="input-field col s10 offset-s1">
                                 <h:inputTextarea id="descricao" class="materialize-textarea"
-                                                 value="#{objetoMB.objeto.descricao}"/>
+                                                 value="#{objetoMB.objeto.descricao}" required="true"
+                                                 requiredMessage="Campo em branco"/>
                                 <label for="descricao">Descreva as características do Objeto</label>
                             </div>
                             <div class="input-field col s3 offset-s1">

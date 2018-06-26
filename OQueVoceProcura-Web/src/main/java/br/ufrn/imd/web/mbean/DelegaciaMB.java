@@ -6,6 +6,7 @@ import br.ufrn.imd.sbean.DelegaciaSBInterface;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,9 +27,16 @@ public class DelegaciaMB implements Serializable {
 
 
     public String salvar() {
-        delegaciaSB.salvar(this.delegacia);
-        delegacia = new Delegacia();
-
+        try {
+            delegaciaSB.salvar(this.delegacia);
+            delegacia = new Delegacia();
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Sucesso",
+                    "Delegacia cadastrada com sucesso!"));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Erro", "Erro ao tentar cadastrar delegacia!"));
+            return "/delegacia/form";
+        }
         return "/delegacia/lista?faces-redirect=true";
     }
 

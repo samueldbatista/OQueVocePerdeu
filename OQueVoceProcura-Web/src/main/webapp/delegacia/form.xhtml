@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
 >
 <h:body>
 
@@ -12,6 +13,7 @@
         <ui:define name="content">
             <h:form id="idForm">
                     <div class="row">
+                        <p:messages closable="true"/>
                         <div class="card-panel">
                             <h4 class="center">Cadastro de Delegacias</h4>
                             <h:inputHidden id="id-delegacia" value="#{delegaciaMB.delegacia.id}"/>
@@ -19,21 +21,25 @@
                             <div class="card-content">
                                 <div class="row">
                                     <div class="input-field col s10 offset-s1">
-                                        <h:inputText id="nome" value="#{delegaciaMB.delegacia.nome}" />
+                                        <h:inputText id="nome" value="#{delegaciaMB.delegacia.nome}" required="true"
+                                                     requiredMessage="Campo Nome em branco"/>
                                         <label for="nome">Insira o nome</label>
                                     </div>
                                     <div class="input-field col s10 offset-s1">
-                                        <h:inputText id="abreviatura" value="#{delegaciaMB.delegacia.abreviatura}"/>
+                                        <h:inputText id="abreviatura" value="#{delegaciaMB.delegacia.abreviatura}"
+                                                     required="true" requiredMessage="Campo Abreviatura em branco"/>
                                         <label for="abreviatura">Insira a abreviatura</label>
                                     </div>
                                     <div class="input-field col s10 offset-s1">
-                                        <h:inputText id="login" value="#{delegaciaMB.delegacia.telefone}"/>
+                                        <h:inputText id="login" value="#{delegaciaMB.delegacia.telefone}"
+                                                     required="true" requiredMessage="Campo Telefone em branco"/>
                                         <label for="login">Insira o Telefone</label>
                                     </div>
 
                                     <div class="input-field col s3 offset-s1">
                                         <h:inputText id="cepDelegacia" styleClass="cep-class" onchange="buscarEndereco()"
-                                                     value="#{delegaciaMB.delegacia.endereco.cep}"/>
+                                                     value="#{delegaciaMB.delegacia.endereco.cep}" required="true"
+                                                     requiredMessage="Campo CEP em branco"/>
                                         <label for="cepDelegacia">Insira o CEP</label>
                                     </div>
                                     <div class="input-field col s7">
