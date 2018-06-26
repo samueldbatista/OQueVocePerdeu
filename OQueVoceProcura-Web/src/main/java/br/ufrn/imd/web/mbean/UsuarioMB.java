@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -44,8 +45,17 @@ public class UsuarioMB implements Serializable {
     private List<Delegacia> delegacias = new ArrayList<>();
 
     public String salvar() {
-        usuarioSB.salvar(this.usuario);
-        usuario = new Usuario();
+        try {
+            usuarioSB.salvar(this.usuario);
+            usuario = new Usuario();
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário cadastrado com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Erro", "Erro ao tentar cadastrar usuário!"));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        }
         return "/usuarios/lista.xhtml?faces-redirect=true";
     }
 
