@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+
+>
+<h:body>
+
+    <ui:composition template="${facesContext.externalContext.requestContextPath}/template/layout.xhtml">
+        <ui:define name="content">
+            <p:messages closable="true"/>
+            <div class="row ">
+                <div class="card-panel">
+                    <h4 class="center">Detalhes do Objeto</h4>
+                    <h:inputHidden id="id-objeto" value="#{objetoMB.objeto.id}"/>
+                    <div class="card-content">
+                        <div class="input-field col s10 offset-s1">
+                            <h:inputText id="nome" value="#{objetoMB.objeto.nome}" disabled="true"/>
+                            <label for="nome">Nome</label>
+                        </div>
+                        <div class="input-field col s10 offset-s1">
+                            <h:inputText id="identificador" value="#{objetoMB.objeto.identificador}" disabled="true"/>
+                            <label for="identificador">Identificador</label>
+                        </div>
+                        <div class="input-field col s10 offset-s1">
+                            <h:inputTextarea id="descricao" class="materialize-textarea"
+                                             value="#{objetoMB.objeto.descricao}" disabled="true"/>
+                            <label for="descricao">Descrição do Objeto</label>
+                        </div>
+                        <div class="input-field col s3 offset-s1">
+                            <h:inputText id="condicao" value="#{objetoMB.objeto.condicao.chave}" disabled="true"/>
+                            <label>Estado de conservação</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <h:inputText id="status" value="#{objetoMB.objeto.status.chave}" disabled="true"/>
+                            <label>Status do objeto</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <h:inputText id="tipo" value="#{objetoMB.objeto.tipo.chave}" disabled="true"/>
+                            <label>Tipo de objeto</label>
+                        </div>
+                        <h5 class="center">Localização</h5>
+                        <div class="input-field col s10 offset-s1">
+                            <h:inputText id="delegacia" value="#{objetoMB.objeto.delegacia.nome}" disabled="true"/>
+                            <label>Delegacia</label>
+                        </div>
+                        <div class="input-field col s3 offset-s1">
+                            <h:inputText id="cepDelegacia" value="#{objetoMB.objeto.delegacia.endereco.cep}"
+                                         styleClass="cep-class" disabled="true"/>
+                            <label for="cepDelegacia">Insira o CEP</label>
+                        </div>
+                        <div class="input-field col s7">
+                            <h:inputText id="ruaDelegacia" value="#{objetoMB.objeto.delegacia.endereco.rua}"
+                                         disabled="true"/>
+                            <label for="ruaDelegacia">Rua</label>
+                        </div>
+                        <div class="input-field col s2 offset-s1">
+                            <h:inputText id="numeroDelegacia" value="#{objetoMB.objeto.delegacia.endereco.numero}"
+                                         disabled="true"/>
+                            <label for="numeroDelegacia">Numero</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <h:inputText id="bairroDelegacia" value="#{objetoMB.objeto.delegacia.endereco.bairro}"
+                                         disabled="true"/>
+                            <label for="bairroDelegacia">Bairro</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <h:inputText id="cidadeDelegacia" value="#{objetoMB.objeto.delegacia.endereco.cidade}"
+                                         disabled="true"/>
+                            <label for="cidadeDelegacia">Cidade</label>
+                        </div>
+                        <div class="input-field col s1">
+                            <h:inputText id="estadoDelegacia" value="#{objetoMB.objeto.delegacia.endereco.estado}"
+                                         disabled="true"/>
+                            <label for="estadoDelegacia">Estado</label>
+                        </div>
+                        <c:if test="#{objetoMB.objeto.status.chave == 'Encontrado' or 'Devolvido'}">
+                            <h5 class="center">Imagens</h5>
+                        </c:if>
+                    </div>
+                    <h:form>
+                        <div class="center">
+                            <h:commandLink class="btn grey darken-2 center" action="lista.xhtml">Voltar</h:commandLink>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

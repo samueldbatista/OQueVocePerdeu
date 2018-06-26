@@ -36,23 +36,43 @@ public class ObjetoMB implements Serializable {
     public void pesquisar() {
         this.objetos = this.objetoSB.pesquisarPorTipo(tipoBusca,info,identificador);
         if (this.objetos.size() < 1) {
-            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Desculpe! Seu objeto não foi encontrado!", ""));
         }
     }
 
     public void salvar() throws IOException{
-        if(!fotos.isEmpty()) {
-            objeto.setFotos(fotos);
+        try {
+            if(!fotos.isEmpty()) {
+                objeto.setFotos(fotos);
+            }
+            objetoSB.salvar(this.objeto);
+            objeto = new Objeto();
+            fotos =  new ArrayList<>();
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Objeto Cadastrado com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        } catch (Exception e){
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Erro", "Erro ao tentar cadastrar Objeto!"));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         }
-        objetoSB.salvar(this.objeto);
-        objeto = new Objeto();
-        fotos =  new ArrayList<>();
+
     }
 
     public List<Objeto> listar() { return objetoSB.listar(); }
 
-    public void editar(Long id) { this.objetoSB.editar(id); }
+    public String editar(Long id) {
+        this.objeto = this.objetoSB.editar(id);
+
+        return "/objetos/form";
+    }
+
+    public String detalhar(Long id) {
+        this.objeto = this.objetoSB.editar(id);
+
+        return "/objetos/detalhes";
+    }
 
     public void adicionarImagem() throws IOException{
         String formato = imagem.getContentType();
